@@ -55,7 +55,7 @@ function conbonus_social_links() {
     $social_links = conbonus_get_social_links();
     
     foreach ($social_links as $platform => $url) {
-        if ($url && $url !== '#') {
+        if ($url && $url !== '') {
             echo '<a class="icon-socials icon-' . esc_attr($platform) . '" href="' . esc_url($url) . '" target="_blank" rel="noopener"></a>';
         }
     }
@@ -252,4 +252,70 @@ function conbonus_related_posts($post_id = null, $limit = 3) {
         
         wp_reset_postdata();
     }
+}
+
+/**
+ * Get featured products
+ */
+function conbonus_get_featured_products($limit = 8) {
+    $args = array(
+        'post_type' => 'product',
+        'posts_per_page' => $limit,
+        'meta_query' => array(
+            array(
+                'key' => '_featured',
+                'value' => 'yes'
+            )
+        )
+    );
+    
+    return get_posts($args);
+}
+
+/**
+ * Get best selling products
+ */
+function conbonus_get_best_selling_products($limit = 8) {
+    $args = array(
+        'post_type' => 'product',
+        'posts_per_page' => $limit,
+        'meta_key' => 'total_sales',
+        'orderby' => 'meta_value_num',
+        'order' => 'DESC'
+    );
+    
+    return get_posts($args);
+}
+
+/**
+ * Get new arrival products
+ */
+function conbonus_get_new_arrival_products($limit = 8) {
+    $args = array(
+        'post_type' => 'product',
+        'posts_per_page' => $limit,
+        'orderby' => 'date',
+        'order' => 'DESC'
+    );
+    
+    return get_posts($args);
+}
+
+/**
+ * Get sale products
+ */
+function conbonus_get_sale_products($limit = 8) {
+    $args = array(
+        'post_type' => 'product',
+        'posts_per_page' => $limit,
+        'meta_query' => array(
+            array(
+                'key' => '_sale_price',
+                'value' => '',
+                'compare' => '!='
+            )
+        )
+    );
+    
+    return get_posts($args);
 }

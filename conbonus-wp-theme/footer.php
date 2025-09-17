@@ -1,3 +1,12 @@
+<?php
+/**
+ * The template for displaying the footer
+ *
+ * @package ConBonus
+ * @since 1.0.0
+ */
+?>
+
 <!-- Footer -->
 <footer class="footer">
     <div class="footer-1">
@@ -25,14 +34,14 @@
                     <div class="mt-30">
                         <?php
                         $social_links = array(
-                            'facebook' => get_theme_mod('conbonus_facebook', '#'),
-                            'instagram' => get_theme_mod('conbonus_instagram', '#'),
-                            'twitter' => get_theme_mod('conbonus_twitter', '#'),
-                            'linkedin' => get_theme_mod('conbonus_linkedin', '#'),
+                            'facebook' => get_theme_mod('conbonus_facebook', ''),
+                            'instagram' => get_theme_mod('conbonus_instagram', ''),
+                            'twitter' => get_theme_mod('conbonus_twitter', ''),
+                            'linkedin' => get_theme_mod('conbonus_linkedin', ''),
                         );
                         
                         foreach ($social_links as $platform => $url) :
-                            if ($url && $url !== '#') :
+                            if ($url && $url !== '') :
                         ?>
                         <a class="icon-socials icon-<?php echo esc_attr($platform); ?>" href="<?php echo esc_url($url); ?>" target="_blank" rel="noopener"></a>
                         <?php
